@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Controller, Scene } from "react-scrollmagic";
-import useWindowDimensions from "./WindowDimensions";
 
 const TweenStyled = styled.div`
   .section {
@@ -38,10 +37,9 @@ const TweenStyled = styled.div`
 //   }, []); // Make sure the effect runs only once
 // };
 const initMargin = 100;
-const SceneTwo = () => {
+const SceneTwo = ({dispatch}) => {
   const [position, setPosition] = useState(0);
   const [marginLeft, setMarginLeft] = useState(initMargin);
-  const { viewHeight, viewWidth } = useWindowDimensions();
 
   return (
     <TweenStyled>
@@ -63,6 +61,9 @@ const SceneTwo = () => {
             // enter ? console.log([enter]) : null;
             setPosition(progress);
             setMarginLeft(initMargin * (1 - progress));
+            // if (progress === 1) {
+            //   dispatch({type: 'setInViewport'});
+            // }
             return (
               <div id="customactions">
                 <label>progress: </label>
