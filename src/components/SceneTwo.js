@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Controller, Scene } from "react-scrollmagic";
 
 const TweenStyled = styled.div`
   .section {
@@ -16,33 +15,14 @@ const TweenStyled = styled.div`
   }
 `;
 
-// const useAnimationFrame = callback => {
-//   // Use useRef for mutable variables that we want to persist
-//   // without triggering a re-render on their change
-//   const requestRef = React.useRef();
-//   const previousRef = React.useRef();
-
-//   const animate = current => {
-//     if (previousRef.current != undefined) {
-//       const delta = current - previousRef.current;
-//       callback(delta);
-//     }
-//     previousRef.current = current;
-//     requestRef.current = requestAnimationFrame(animate);
-//   };
-
-//   React.useEffect(() => {
-//     requestRef.current = requestAnimationFrame(animate);
-//     return () => cancelAnimationFrame(requestRef.current);
-//   }, []); // Make sure the effect runs only once
-// };
 const initMargin = 100;
 const SceneTwo = ({ progress }) => {
-  let marginLeft= initMargin * (1 - progress);
+  const [marginLeft, setMarginLeft] = useState(false)
+  useEffect(() => {
+      setMarginLeft(initMargin * (1 - progress));
+  }, [progress]);
   return (
-    <TweenStyled>
-      <div className="section" />
-        <div id="customactions">
+        <div id="customactions" style={{padding: '100px 0'}}>
           <label>progress: </label>
           <div>
             <h1
@@ -58,8 +38,6 @@ const SceneTwo = ({ progress }) => {
             </p>
           </div>
         </div>
-      <div className="section" />
-    </TweenStyled>
   );
 };
 
