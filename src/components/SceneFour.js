@@ -6,29 +6,20 @@ const style = {
   border: "solid purple 1px",
   display: "flex",
   justifyContent: "center",
-  alignItems: "center"
+  alignItems: "center",
+  padding: "40px"
 };
 
-const SceneFour = () => {
-  const [position, setPosition] = useState(0);
+const SceneFour = ({ progress }) => {
   const [triggered, setTriggered] = useState(false)
   useEffect(() => {
-    if (position > 0.25 && !triggered) {
+    if (progress > 0.25 && !triggered) {
       setTriggered(true);
     }
-  }, [position, triggered]);
+  }, [progress, triggered]);
   return (
     <div style={style}>
-      <Controller>
-        <Scene duration={600} pin>
-        {progress => {
-            setPosition(progress);
-            return (
-              <code id="progress">{triggered ? 'I am triggered' : 'I am not'}</code>
-            )
-          }}
-        </Scene>
-      </Controller>
+      <code id="progress">{triggered ? 'I am triggered' : 'I am not'}</code>
     </div>
 )};
 
