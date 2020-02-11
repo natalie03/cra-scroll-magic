@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const style = {
   height: "70vh",
@@ -9,16 +9,10 @@ const style = {
   padding: "40px"
 };
 
-const SceneFour = ({ progress }) => {
-  const [triggered, setTriggered] = useState(false)
-  useEffect(() => {
-    if (progress > 0.25 && !triggered) {
-      setTriggered(true);
-    }
-  }, [progress, triggered]);
+const SceneFour = ({ progress, inView }) => {
   return (
     <div style={style}>
-      <code id="progress">{triggered ? 'I am triggered' : 'I am not'}</code>
+      <code id="progress">{inView ? 'I am in view' : 'I am not'}</code>
     </div>
 )};
 

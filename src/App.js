@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { Controller, Scene } from "react-scrollmagic";
 import './App.css';
 
 import { SceneOne, SceneTwo, SceneThree, SceneFour } from "./components";
 import useIntersect from "./helpers/useIntersect";
 
 
-const Scene = ({ name, children }) => {
+const IntersectionWrapper = ({ name, children }) => {
   const [inView, setInView] = useState(false);
 
   const [ref, entry] = useIntersect({
@@ -15,27 +16,57 @@ const Scene = ({ name, children }) => {
     callbackWhenInView: setInView
   });
 
-
   return (
-    <div ref={ref} style={{ opacity: inView ? 1 : 0, transition: 'opacity 1s ease' }}>
-      {children}
+    <div ref={ref}>
+      {React.cloneElement(children, { inView: inView })}
     </div>
   );
 };
 
 
 const App = () => (
-    <div className="App">
-      <Scene name="Scene 1">
-        <SceneOne />
+  <div className="App">
+    <Controller>
+      <Scene duration={500} pin>
+        {(progress) => {
+          return (
+            <div>
+              <IntersectionWrapper>
+                <SceneOne />
+              </IntersectionWrapper>
+            </div>)
+        }}
       </Scene>
-      <Scene name="Scene 2">
-        <SceneTwo />
+      <Scene triggerHook={0} duration={500} pin>
+        {(progress, event) => {
+          return (
+            <div>
+              <IntersectionWrapper>
+                <SceneTwo progress={progress} />
+              </IntersectionWrapper>
+            </div>
+        )}}
       </Scene>
-      <Scene name="Scene 3">
-        <SceneThree />
+      <Scene triggerHook={0} duration={500} pin>
+        {progress => (
+          <div>
+            <IntersectionWrapper>
+              <SceneThree progress={progress} />
+            </IntersectionWrapper>
+          </div>
+        )}
       </Scene>
-    </div>
+      <Scene triggerHook={0} duration={500} pin>
+      {progress => (
+        <div>
+          <IntersectionWrapper>
+            <SceneFour progress={progress} />
+            </IntersectionWrapper>
+          </div>
+        )}
+        </Scene>
+    </Controller>
+  </div>
 );
 
 export default App;
