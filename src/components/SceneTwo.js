@@ -37,7 +37,7 @@ const TweenStyled = styled.div`
 //   }, []); // Make sure the effect runs only once
 // };
 const initMargin = 100;
-const SceneTwo = ({dispatch}) => {
+const SceneTwo = () => {
   const [position, setPosition] = useState(0);
   const [marginLeft, setMarginLeft] = useState(initMargin);
 
@@ -61,9 +61,6 @@ const SceneTwo = ({dispatch}) => {
             // enter ? console.log([enter]) : null;
             setPosition(progress);
             setMarginLeft(initMargin * (1 - progress));
-            // if (progress === 1) {
-            //   dispatch({type: 'setInViewport'});
-            // }
             return (
               <div id="customactions">
                 <label>progress: </label>

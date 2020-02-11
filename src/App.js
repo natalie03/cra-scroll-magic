@@ -2,9 +2,7 @@ import React from 'react';
 import { useReducer } from 'react';
 import './App.css';
 
-import SceneOne from "./components/SceneOne";
-import SceneTwo from "./components/SceneTwo";
-import SceneThree from "./components/SceneThree";
+import { SceneOne, SceneTwo, SceneThree, SceneFour } from "./components";
 
 const initialState = {inViewport: false};
 
@@ -25,8 +23,9 @@ function App() {
     <div className="App">
       <p>Is scene 2 in viewport? {state.inViewport}</p>
       <SceneOne />
-      <SceneTwo dispatch={dispatch} />
+      <SceneTwo />
       <SceneThree />
+      <SceneFour dispatch={dispatch} />
     </div>
   );
 }
