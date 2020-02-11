@@ -8,11 +8,7 @@ const style = {
 
 const SceneOne = () => (
   <div style={style}>
-    <Controller>
-      <Scene duration={700} pin>
-        <div>Stickyyy</div>
-      </Scene>
-    </Controller>
+    <div>Stickyyy</div>
   </div>
 );
 
