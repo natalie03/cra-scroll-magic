@@ -8,7 +8,9 @@ const App = () => (
     <div className="App">
       <Controller>
         <Scene duration={700} pin>
-          <div><SceneOne /></div>
+          {(progress, event) => {
+            return <div><SceneOne /></div>
+          }}
         </Scene>
         <div id="trigger" />
         <Scene triggerElement="#trigger" duration={500} pin>

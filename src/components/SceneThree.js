@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Controller, Scene } from "react-scrollmagic";
 
 const TweenStyled = styled.div`
   .section {

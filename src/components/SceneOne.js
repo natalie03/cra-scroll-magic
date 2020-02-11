@@ -1,5 +1,4 @@
 import React from "react";
-import { Controller, Scene } from "react-scrollmagic";
 
 const style = {
   height: "70vh",
