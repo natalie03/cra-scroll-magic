@@ -4,33 +4,37 @@ import './App.css';
 
 import { SceneOne, SceneTwo, SceneThree, SceneFour } from "./components";
 
-function App() {
-  return (
+const App = () => (
     <div className="App">
       <Controller>
         <Scene duration={700} pin>
-          <SceneOne />
+          <div><SceneOne /></div>
         </Scene>
         <div id="trigger" />
         <Scene triggerElement="#trigger" duration={500} pin>
           {progress => (
-            <SceneTwo progress={progress} />
+            <div>
+              <SceneTwo progress={progress} />
+            </div>
           )}
         </Scene>
         <div id="triggerTwo" />
         <Scene triggerElement="#triggerTwo" triggerHook={.25} duration={500} pin>
           {progress => (
-            <SceneThree progress={progress} />
+            <div>
+              <SceneThree progress={progress} />
+            </div>
           )}
         </Scene>
         <Scene duration={600} pin>
         {progress => (
-          <SceneFour progress={progress} />
+          <div>
+            <SceneFour progress={progress} />
+          </div>
         )}
         </Scene>
       </Controller>
     </div>
-  );
-}
+);
 
 export default App;
