@@ -1,9 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Controller, Scene } from "react-scrollmagic";
+import React, { useState } from "react";
 import "./App.css";
-import useWindowDimens from "./components/WindowDimensions";
-import useIntersect from "./helpers/intersectObserver";
+
 import { SceneOne, SceneTwo, SceneThree, SceneFour } from "./components";
+import useIntersect from "./helpers/useIntersect";
+
+const Scene = ({ name, children }) => {
+  const [inView, setInView] = useState(false);
+
+  const [ref, entry] = useIntersect({
+    root: null,
+    threshold: 0,
+    rootMargin: "0px 0px 0px 0px",
+    callbackWhenInView: setInView,
+  });
+
+  return (
+    <div
+      ref={ref}
+      style={{ opacity: inView ? 1 : 0, transition: "opacity 1s ease" }}
+    >
+      {children}
+    </div>
+  );
+};
 
 const IntersectionScene = props => {
   const [state, toggle] = useState(props.initial || 0);
@@ -31,49 +50,15 @@ const App = () => {
   console.log(dimens);
   return (
     <div className="App">
-      <Controller>
-        <Scene duration={700} pin>
-          <div>
-            <SceneOne />
-          </div>
-        </Scene>
-        <div id="trigger" />
-        <Scene triggerElement="#trigger" duration={500} pin>
-          {(progress, event) => {
-            if (event.type === "enter") {
-              console.log("I am entering");
-            }
-            if (event.type === "leave") {
-              console.log("I am leaving");
-            }
-            return (
-              <div>
-                <SceneTwo progress={progress} />
-              </div>
-            );
-          }}
-        </Scene>
-        <div id="triggerTwo" />
-        <Scene
-          triggerElement="#triggerTwo"
-          triggerHook={0.25}
-          duration={500}
-          pin
-        >
-          {progress => (
-            <div>
-              <SceneThree progress={progress} />
-            </div>
-          )}
-        </Scene>
-        <Scene duration={600} pin>
-          {progress => (
-            <div>
-              <SceneFour progress={progress} />
-            </div>
-          )}
-        </Scene>
-      </Controller>
+      <Scene name="Scene 1">
+        <SceneOne />
+      </Scene>
+      <Scene name="Scene 2">
+        <SceneTwo />
+      </Scene>
+      <Scene name="Scene 3">
+        <SceneThree />
+      </Scene>
     </div>
   );
 };
