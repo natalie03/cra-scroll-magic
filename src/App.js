@@ -4,31 +4,41 @@ import './App.css';
 
 import { SceneOne, SceneTwo, SceneThree, SceneFour } from "./components";
 
-const App = () => (
+import useWindowDimens from './components/WindowDimensions';
+
+const App = () => {
+  const {width, height} = useWindowDimens();
+
+  return(
     <div className="App">
       <Controller>
-        <Scene duration={700} pin>
-          {(progress, event) => {
+        <Scene duration={height} pin>
+          {(progress) => {
             return <div><SceneOne /></div>
           }}
         </Scene>
-        <div id="trigger" />
-        <Scene triggerElement="#trigger" duration={500} pin>
-          {progress => (
-            <div>
-              <SceneTwo progress={progress} />
-            </div>
-          )}
+        <Scene triggerHook={0} duration={height} pin>
+          {(progress, event) => {
+              if (event.type === "enter") {
+                console.log("I am entering");
+              }
+              if (event.type === "leave") {
+                console.log("I am leaving");
+              }
+           return (
+              <div>
+                <SceneTwo progress={progress} />
+              </div>
+          )}}
         </Scene>
-        <div id="triggerTwo" />
-        <Scene triggerElement="#triggerTwo" triggerHook={.25} duration={500} pin>
+        <Scene triggerHook={0} duration={height} pin>
           {progress => (
             <div>
               <SceneThree progress={progress} />
             </div>
           )}
         </Scene>
-        <Scene duration={600} pin>
+        <Scene triggerHook={0} duration={height} pin>
         {progress => (
           <div>
             <SceneFour progress={progress} />
@@ -38,5 +48,6 @@ const App = () => (
       </Controller>
     </div>
 );
+}
 
 export default App;
