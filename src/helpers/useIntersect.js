@@ -19,6 +19,9 @@ const useIntersect = ({
         if (entry.intersectionRatio > 0) {
           callbackWhenInView(true);
         }
+        if (entry.intersectionRatio === 0) {
+          callbackWhenInView(false);
+        }
       },
       {
         root,

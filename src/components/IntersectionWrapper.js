@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import useIntersect from "../helpers/useIntersect";
 
 const IntersectionWrapper = ({ name, children }) => {
@@ -7,13 +7,13 @@ const IntersectionWrapper = ({ name, children }) => {
   const [ref, entry] = useIntersect({
     root: null,
     threshold: 0,
-    rootMargin: '0px 0px 0px 0px',
-    callbackWhenInView: setInView
+    rootMargin: "0px 0px 0px 0px",
+    callbackWhenInView: setInView,
   });
 
   return (
     <div ref={ref}>
-      {React.cloneElement(children, { inView: inView })}
+      {React.cloneElement(children, { inView: inView, entry: entry })}
     </div>
   );
 };
