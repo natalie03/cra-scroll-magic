@@ -6,14 +6,15 @@ const style = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "40px"
+  padding: "40px",
 };
 
-const SceneFour = ({ progress, inView }) => {
+const SceneFour = ({ progress, inView, entry }) => {
   return (
     <div style={style}>
-      <code id="progress">{inView ? 'I am in view' : 'I am not'}</code>
+      <code id="progress">{inView ? "I am in view" : "I am not"}</code>
     </div>
-)};
+  );
+};
 
 export default SceneFour;
