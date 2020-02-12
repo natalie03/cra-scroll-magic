@@ -1,48 +1,48 @@
 import React, { useState } from "react";
+import { Controller, Scene } from "react-scrollmagic";
 import "./App.css";
 
-import { SceneOne, SceneTwo, SceneThree, SceneFour } from "./components";
-import useIntersect from "./helpers/useIntersect";
+import {
+  Marquee,
+  ZoomKitten,
+  ViewTrigger,
+  IntersectionWrapper,
+} from "./components";
 
-const Scene = ({ name, children }) => {
-  const [inView, setInView] = useState(false);
-  const [prevIntersect, setPrevIntersect] = useState(0);
-
-  const [ref, entry, prevRef] = useIntersect({
-    root: null,
-    threshold: 0,
-    rootMargin: "0px 0px 0px 0px",
-    callbackWhenInView: setInView,
-    callbackPrevIntersect: setPrevIntersect,
-  });
-
-  // setPrevIntersect(prevRef);
-
+const App = () => {
   return (
-    <div
-      ref={ref}
-      style={{ opacity: inView ? 1 : 0, transition: "opacity 1s ease" }}
-    >
-      {/* {console.log(prevIntersect)}
-      {console.log(prevRef)}
-      {console.log(entry.intersectionRatio)} */}
-      {children}
+    <div className="App">
+      <Controller>
+        <Scene triggerElement="#whatever" duration={1656} pin>
+          {(progress, event) => {
+            return (
+              <div>
+                <Marquee progress={progress} />
+              </div>
+            );
+          }}
+        </Scene>
+        <Scene triggerHook={0} duration={1000} pin>
+          {progress => (
+            <div>
+              <IntersectionWrapper>
+                <ZoomKitten progress={progress} />
+              </IntersectionWrapper>
+            </div>
+          )}
+        </Scene>
+        <Scene triggerHook={0} duration={500} pin>
+          {progress => (
+            <div>
+              <IntersectionWrapper>
+                <ViewTrigger progress={progress} />
+              </IntersectionWrapper>
+            </div>
+          )}
+        </Scene>
+      </Controller>
     </div>
   );
 };
-
-const App = () => (
-  <div className="App">
-    <Scene name="Scene 1">
-      <SceneOne />
-    </Scene>
-    {/* <Scene name="Scene 2">
-      <SceneTwo />
-    </Scene> */}
-    <Scene name="Scene 3">
-      <SceneThree />
-    </Scene>
-  </div>
-);
 
 export default App;

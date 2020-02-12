@@ -7,7 +7,7 @@ const TweenStyled = styled.div`
   }
 `;
 
-const SceneThree = ({ progress }) => {
+const ZoomKitten = ({ progress }) => {
   return (
     <TweenStyled>
       <div 
@@ -34,4 +34,4 @@ const SceneThree = ({ progress }) => {
   );
 };
 
-export default SceneThree;
+export default ZoomKitten;
