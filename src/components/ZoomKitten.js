@@ -7,11 +7,12 @@ const TweenStyled = styled.div`
   }
 `;
 
-const ZoomKitten = ({ progress }) => {
+const ZoomKitten = React.forwardRef(({ progress }, ref) => {
   return (
     <TweenStyled>
       <div 
         id="customactions"
+        ref={ref}
         style={{
           backgroundImage: "url('http://placekitten.com/550/650')",
           minHeight: '75vh',
@@ -32,6 +33,6 @@ const ZoomKitten = ({ progress }) => {
       </div>
     </TweenStyled>
   );
-};
+});
 
 export default ZoomKitten;

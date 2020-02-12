@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Controller, Scene } from "react-scrollmagic";
 import "./App.css";
 
@@ -14,16 +14,21 @@ import { useDimensions } from './helpers';
 
 const App = () => {
   const [marqueeRef, marqueeSize] = useDimensions();
+  const [kittenRef, kittenSize] = useDimensions();
+  const [imageRef, imageSize] = useDimensions();
+
+  let sceneHeight = (marqueeSize.width + kittenSize.height + imageSize.height) || 0;
 
   return (
   <div className='App'>
     <Controller>
-      <img src="https://www.placecage.com/c/800/600" />
-      <Scene triggerHook={0} duration={marqueeSize.width || 0 } pin>
+      <Scene triggerHook={0} offset={kittenSize.height ? kittenSize.height / 2 : 0} duration={sceneHeight} pin>
         {progress => {
           return (
             <div>
+              <img ref={imageRef} src="https://www.placecage.com/c/800/600" />
               <Marquee ref={marqueeRef} progress={progress} width={marqueeSize.width} />
+              <ZoomKitten ref={kittenRef} progress={progress} />
             </div>
             );
           }}
