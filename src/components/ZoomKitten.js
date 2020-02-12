@@ -10,15 +10,15 @@ const TweenStyled = styled.div`
 const ZoomKitten = React.forwardRef(({ progress }, ref) => {
   return (
     <TweenStyled>
-      <div 
+      <div
         id="customactions"
         ref={ref}
         style={{
           backgroundImage: "url('http://placekitten.com/550/650')",
-          minHeight: '75vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
+          minHeight: "75vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <div>
@@ -26,9 +26,9 @@ const ZoomKitten = React.forwardRef(({ progress }, ref) => {
             alt=""
             src="http://placekitten.com/200/200"
             style={{
-              transform: `scale(${progress})`
+              transform: `scale(${-progress})`,
             }}
-            />
+          />
         </div>
       </div>
     </TweenStyled>

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Controller, Scene } from "react-scrollmagic";
 import "./App.css";
@@ -10,26 +9,44 @@ import {
   IntersectionWrapper,
 } from "./components";
 
-import { useDimensions } from './helpers';
+import { useDimensions } from "./helpers";
 
 const App = () => {
   const [marqueeRef, marqueeSize] = useDimensions();
   const [kittenRef, kittenSize] = useDimensions();
   const [imageRef, imageSize] = useDimensions();
 
-  let sceneHeight = (marqueeSize.width + kittenSize.height + imageSize.height) || 0;
+  let sceneHeight =
+    marqueeSize.width + kittenSize.height + imageSize.height || 0;
 
   return (
-  <div className='App'>
-    <Controller>
-      <Scene triggerHook={0} offset={kittenSize.height ? kittenSize.height / 2 : 0} duration={sceneHeight} pin>
-        {progress => {
-          return (
-            <div>
-              <img ref={imageRef} src="https://www.placecage.com/c/800/600" />
-              <Marquee ref={marqueeRef} progress={progress} width={marqueeSize.width} />
-              <ZoomKitten ref={kittenRef} progress={progress} />
-            </div>
+    <div className="App">
+      <Controller>
+        <Scene
+          triggerHook={0}
+          offset={kittenSize.height ? kittenSize.height / 2 : 0}
+          duration={sceneHeight}
+          pin
+        >
+          {progress => {
+            return (
+              <div>
+                <img ref={imageRef} src="https://www.placecage.com/c/800/600" />
+                <Marquee
+                  ref={marqueeRef}
+                  progress={progress}
+                  width={marqueeSize.width}
+                />
+                <Controller>
+                  <Scene duration={600}>
+                    {progressNested => {
+                      return (
+                        <ZoomKitten ref={kittenRef} progress={progressNested} />
+                      );
+                    }}
+                  </Scene>
+                </Controller>
+              </div>
             );
           }}
         </Scene>
