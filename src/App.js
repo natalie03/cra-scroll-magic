@@ -18,8 +18,9 @@ const App = () => {
   return (
   <div className='App'>
     <Controller>
-      <Scene duration={marqueeSize.width} pin>
-        {(progress, event) => {
+      <img src="https://www.placecage.com/c/800/600" />
+      <Scene triggerHook={0} duration={marqueeSize.width || 0 } pin>
+        {progress => {
           return (
             <div>
               <Marquee ref={marqueeRef} progress={progress} width={marqueeSize.width} />
