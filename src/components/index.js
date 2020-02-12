@@ -1,11 +1,11 @@
-import SceneOne from "./SceneOne";
-import SceneTwo from "./SceneTwo";
-import SceneThree from "./SceneThree";
-import SceneFour from "./SceneFour";
+import Marquee from "./Marquee";
+import ZoomKitten from "./ZoomKitten";
+import ViewTrigger from "./ViewTrigger";
+import IntersectionWrapper from "./IntersectionWrapper";
 
 export {
-  SceneOne,
-  SceneTwo,
-  SceneThree,
-  SceneFour
+  Marquee,
+  ZoomKitten,
+  ViewTrigger,
+  IntersectionWrapper
 }
