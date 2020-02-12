@@ -15,7 +15,6 @@ const useIntersect = ({ root = null, rootMargin, threshold = 0, callbackWhenInVi
           if (entry.intersectionRatio > 0) {
             callbackWhenInView(true);
           }
-          
         }, 
         {
           root,
