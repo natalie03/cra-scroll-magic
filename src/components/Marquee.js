@@ -1,30 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-const initMargin = 100;
-
-const SceneTwo = ({ progress }) => {
-  const [marginLeft, setMarginLeft] = useState(false);
-  const [initiated, setInitiated] = useState(false);
-  //TODO: should use transform instead of margin
-  
-  useEffect(() => {
-      setMarginLeft(initMargin * (1 - progress));
-  }, [progress, initiated, setInitiated]);
+const Marquee = React.forwardRef(({ progress, width }, ref) => {  
   return (
-    <div id="customactions" style={{padding: '100px 0'}}>
-      <div>
-        <h1
-          style={{
-            marginLeft: `${marginLeft}vw`,
-            whiteSpace: "nowrap",
-            fontSize: '144px'
-          }}
-        >
-          REAL, STRAIGHTFORWARD, UNFILTERED
-        </h1>
-      </div>
+    <div style={{
+      padding: '100px 0',
+      width: '100%',
+      position: 'relative'
+    }}>
+      <h1
+        ref={ref}
+        style={{
+          position: 'absolute',
+          left: '100%',
+          whiteSpace: 'nowrap',
+          fontSize: '144px',
+          transform: `translateX(-${progress * width}px)`
+        }}
+      >
+        REAL, STRAIGHTFORWARD, UNFILTERED
+      </h1>
     </div>
   );
-};
+});
 
-export default SceneTwo;
+export default Marquee;

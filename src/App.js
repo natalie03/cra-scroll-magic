@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
-import { Controller, Scene } from "react-scrollmagic";
+import React from 'react';
+import { Controller, Scene } from 'react-scrollmagic';
 import './App.css';
 
-import { Marquee, ZoomKitten, ViewTrigger, IntersectionWrapper } from "./components";
+import { useDimensions } from './helpers';
+
+import { Marquee, ZoomKitten, ViewTrigger, IntersectionWrapper } from './components';
 
 const App = () => {
+  const [marqueeRef, marqueeSize] = useDimensions();
+
+  console.log(marqueeSize);
+
   return (
-  <div className="App">
+  <div className='App'>
     <Controller>
-      <Scene triggerElement="#whatever" duration={1656} pin>
+      <Scene duration={marqueeSize.width} pin>
         {(progress, event) => {
           return (
             <div>
-              <Marquee progress={progress} />
+              <Marquee ref={marqueeRef} progress={progress} width={marqueeSize.width} />
             </div>
         )}}
       </Scene>
