@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Controller, Scene } from "react-scrollmagic";
 import "./App.css";
@@ -9,16 +10,21 @@ import {
   IntersectionWrapper,
 } from "./components";
 
+import { useDimensions } from './helpers';
+
 const App = () => {
+  const [marqueeRef, marqueeSize] = useDimensions();
+
   return (
-    <div className="App">
-      <Controller>
-        <Scene triggerElement="#whatever" duration={1656} pin>
-          {(progress, event) => {
-            return (
-              <div>
-                <Marquee progress={progress} />
-              </div>
+  <div className='App'>
+    <Controller>
+      <img src="https://www.placecage.com/c/800/600" />
+      <Scene triggerHook={0} duration={marqueeSize.width || 0 } pin>
+        {progress => {
+          return (
+            <div>
+              <Marquee ref={marqueeRef} progress={progress} width={marqueeSize.width} />
+            </div>
             );
           }}
         </Scene>
