@@ -16,6 +16,7 @@ const useIntersect = ({
 
     observer.current = new window.IntersectionObserver(
       ([entry]) => {
+        updateEntry(entry);
         if (entry.intersectionRatio > 0) {
           callbackWhenInView(true);
         }
